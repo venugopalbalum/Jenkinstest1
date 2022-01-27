@@ -11,6 +11,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                echo " Workspace ${env.WORKSPACE} exec ${env.EXECUTOR_NUMBER}"
             }
         }
         stage('Deploy') {
