@@ -1,3 +1,4 @@
+import groovy.json.JSulperClassic
 pipeline {
     agent any
     options {
@@ -16,6 +17,15 @@ pipeline {
                     userRemoteConfigs: [[
                         credentialsId: 'GIT',
                         url: 'https://github.com/venugopalbalum/Jenkinstest1']]])
+            }
+        }
+        stage('Read pipeline.json'){
+            steps{
+                script{
+                    parsedJson = null
+                    inputFile = readFile("{$env.Workspace}/pipeline.json")
+                    println "Done reading pipeline."
+                }
             }
         }
 
