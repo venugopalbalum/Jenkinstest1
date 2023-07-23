@@ -1,5 +1,5 @@
 pipeline {
-    agent default
+    //agent default
     stages {
         stage('Test') {
             steps {
