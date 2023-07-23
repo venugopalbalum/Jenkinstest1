@@ -1,17 +1,32 @@
 pipeline {
     agent any
+    options {
+    // Only keep the 10 most recent builds
+    buildDiscarder(logRotator(numToKeepStr:'10'))
+    }
 
     stages {
+        stage ('Prepare') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "origin/declarative"]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'LocalBranch']],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                        credentialsId: 'GIT',
+                        url: 'https://github.com/venugopalbalum/Jenkinstest1']]])
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building..'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                echo " Workspace ${env.WORKSPACE} exec ${env.EXECUTOR_NUMBER}"
             }
         }
         stage('Deploy') {
