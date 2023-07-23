@@ -28,6 +28,11 @@ pipeline {
                 }
             }
         }
+        stage('Read pipeline') {
+            steps {
+                echo 'Building..'
+            }
+        }
 
         stage('Build') {
             steps {
