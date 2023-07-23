@@ -23,6 +23,7 @@ pipeline {
             steps{
                 script{
                     parsedJson = null
+                    println "reading pipeline.json"
                     inputFile = readFile("{$env.Workspace}/pipeline.json")
                     println "Done reading pipeline."
                 }
